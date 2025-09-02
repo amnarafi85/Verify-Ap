@@ -96,7 +96,7 @@ export default function CertificateVerify() {
               {/* Skills Gained Box */}
               {certificate.skills_gained && (
                 <div className="info-box">
-                  <h4>💡 Skills Gained</h4>
+                  <h4> Skills Gained</h4>
                   <p>{certificate.skills_gained}</p>
                 </div>
               )}
