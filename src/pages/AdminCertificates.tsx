@@ -14,6 +14,8 @@ interface Certificate {
   completion_status: string;
   badge_url: string;
   serial_number: string;
+  course_description?: string; // NEW
+  skills_gained?: string;      // NEW
   created_at?: string;
   [key: string]: any; // allows dynamic indexing like row[field]
 }
@@ -29,6 +31,8 @@ export default function AdminCertificates() {
     completion_status: "Completed",
     badge_url: "",
     serial_number: "",
+    course_description: "",
+    skills_gained: "",
   });
   const [editing, setEditing] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -48,6 +52,8 @@ export default function AdminCertificates() {
       completion_status: "Completed",
       badge_url: "",
       serial_number: "",
+      course_description: "",
+      skills_gained: "",
     },
   ]);
 
@@ -91,6 +97,8 @@ export default function AdminCertificates() {
       completion_status: form.completion_status,
       badge_url: convertDriveLink(form.badge_url.trim()),
       serial_number: form.serial_number.trim(),
+      course_description: form.course_description?.trim() || "",
+      skills_gained: form.skills_gained?.trim() || "",
     };
 
     let error;
@@ -144,6 +152,8 @@ export default function AdminCertificates() {
       completion_status: "Completed",
       badge_url: "",
       serial_number: "",
+      course_description: "",
+      skills_gained: "",
     });
     setEditing(false);
   };
@@ -171,6 +181,8 @@ export default function AdminCertificates() {
           completion_status: row.completion_status?.trim() || "Completed",
           badge_url: convertDriveLink(row.badge_url?.trim() || ""),
           serial_number: row.serial_number?.trim() || "",
+          course_description: row.course_description?.trim() || "",
+          skills_gained: row.skills_gained?.trim() || "",
         }));
 
         const { error } = await supabase
@@ -201,10 +213,12 @@ export default function AdminCertificates() {
       "completion_status",
       "badge_url",
       "serial_number",
+      "course_description",
+      "skills_gained",
     ];
     const csvContent = [
       headers.join(","),
-      "John Doe,john@example.com,React Basics,4 Weeks,Completed,https://drive.google.com/file/d/FILE_ID/view,ABC123",
+      "John Doe,john@example.com,React Basics,4 Weeks,Completed,https://drive.google.com/file/d/FILE_ID/view,ABC123,Learn React fundamentals,JavaScript, JSX, React Hooks"
     ].join("\n");
     const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
     const url = URL.createObjectURL(blob);
@@ -235,6 +249,8 @@ export default function AdminCertificates() {
         completion_status: "Completed",
         badge_url: "",
         serial_number: "",
+        course_description: "",
+        skills_gained: "",
       },
     ]);
   };
@@ -248,6 +264,8 @@ export default function AdminCertificates() {
       completion_status: row.completion_status.trim() || "Completed",
       badge_url: convertDriveLink(row.badge_url.trim()),
       serial_number: row.serial_number.trim(),
+      course_description: row.course_description?.trim() || "",
+      skills_gained: row.skills_gained?.trim() || "",
     }));
 
     const { error } = await supabase.from("certificates").insert(cleaned);
@@ -264,6 +282,8 @@ export default function AdminCertificates() {
           completion_status: "Completed",
           badge_url: "",
           serial_number: "",
+          course_description: "",
+          skills_gained: "",
         },
       ]);
       fetchCertificates();
@@ -319,6 +339,20 @@ export default function AdminCertificates() {
             }
             required
           />
+          <input
+            type="text"
+            placeholder="Course Description"
+            value={form.course_description || ""}
+            onChange={(e) =>
+              setForm({ ...form, course_description: e.target.value })
+            }
+          />
+          <input
+            type="text"
+            placeholder="Skills Gained"
+            value={form.skills_gained || ""}
+            onChange={(e) => setForm({ ...form, skills_gained: e.target.value })}
+          />
           <select
             value={form.completion_status}
             onChange={(e) =>
@@ -372,6 +406,8 @@ export default function AdminCertificates() {
               <th>Email</th>
               <th>Course</th>
               <th>Duration</th>
+              <th>Course Description</th>
+              <th>Skills Gained</th>
               <th>Status</th>
               <th>Badge URL</th>
               <th>Serial</th>
@@ -443,6 +479,9 @@ export default function AdminCertificates() {
               <tr>
                 <th>Student</th>
                 <th>Course</th>
+                <th>Duration</th>
+                <th>Description</th>
+                <th>Skills</th>
                 <th>Serial</th>
                 <th>Email</th>
                 <th>Status</th>
@@ -455,6 +494,9 @@ export default function AdminCertificates() {
                 <tr key={c.id}>
                   <td>{c.student_name}</td>
                   <td>{c.course_name}</td>
+                  <td>{c.course_duration}</td>
+                  <td>{c.course_description}</td>
+                  <td>{c.skills_gained}</td>
                   <td>{c.serial_number}</td>
                   <td>{c.student_email}</td>
                   <td>{c.completion_status}</td>
@@ -487,7 +529,7 @@ export default function AdminCertificates() {
 
               {filteredCertificates.length === 0 && (
                 <tr>
-                  <td colSpan={7} className="text-center">
+                  <td colSpan={10} className="text-center">
                     No certificates found.
                   </td>
                 </tr>

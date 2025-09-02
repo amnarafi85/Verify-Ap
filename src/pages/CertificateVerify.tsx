@@ -12,6 +12,8 @@ type CertificateRow = {
   course_duration?: string | null;
   completion_status?: string | null;
   badge_url?: string | null;
+  course_description?: string | null;
+  skills_gained?: string | null;
 };
 
 export default function CertificateVerify() {
@@ -79,11 +81,29 @@ export default function CertificateVerify() {
 
             <div className="certificate-info">
               <p>
-                This is to certify that <strong>{certificate.student_name}</strong> has successfully completed the course <strong>{certificate.course_name}</strong> 
-                {certificate.course_duration ? ` in ${certificate.course_duration}` : ""}. The completion status of this course is <strong>{certificate.completion_status || "N/A"}</strong>, 
-                and the certificate serial number is <strong>{certificate.serial_number}</strong>. 
-                Awareness Paradigm empowers individuals to develop emotional intelligence, enhance personal growth, and gain the confidence needed to achieve professional and personal success. 
-                By completing this course, the learner has demonstrated commitment to self-improvement and the principles of mindfulness, resilience, and holistic learning.
+                This is to certify that <strong>{certificate.student_name}</strong> has successfully completed the course <strong>{certificate.course_name}</strong>
+                {certificate.course_duration ? ` in ${certificate.course_duration}` : ""}. The completion status of this course is <strong>{certificate.completion_status || "N/A"}</strong>, and the certificate serial number is <strong>{certificate.serial_number}</strong>.
+              </p>
+
+              {/* Course Description Box */}
+              {certificate.course_description && (
+                <div className="info-box">
+                  <h4>📘 Course Description</h4>
+                  <p>{certificate.course_description}</p>
+                </div>
+              )}
+
+              {/* Skills Gained Box */}
+              {certificate.skills_gained && (
+                <div className="info-box">
+                  <h4>💡 Skills Gained</h4>
+                  <p>{certificate.skills_gained}</p>
+                </div>
+              )}
+
+              {/* Extra paragraph at the end */}
+              <p className="extra-text">
+                Awareness Paradigm empowers individuals to develop emotional intelligence, enhance personal growth, and gain the confidence needed to achieve professional and personal success. By completing this course, the learner has demonstrated commitment to self-improvement and the principles of mindfulness, resilience, and holistic learning.
               </p>
 
               {certificate.badge_url && (
