@@ -1,4 +1,3 @@
-// src/pages/CertificateVerify.tsx
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../supabaseClient";
@@ -45,7 +44,6 @@ export default function CertificateVerify() {
     }
   };
 
-  // Converts Google Drive URL to direct download
   const getDownloadLink = (url: string) => {
     if (!url) return url;
     if (url.includes("drive.google.com")) {
@@ -76,58 +74,42 @@ export default function CertificateVerify() {
 
       {certificate && (
         <div className="certificate-card">
-          <div className="certificate-header">
-            <img src={logo192} alt="Logo" className="certificate-logo" />
-            <h1 className="verified-text">✅ Verified Certificate</h1>
-          </div>
+          <div className="certificate-content">
+            <img src={logo192} alt="Logo" className="certificate-logo-left" />
 
-          <div className="certificate-body">
-            <p className="cert-text">This is to certify that</p>
-            <h2 className="student-name">{certificate.student_name}</h2>
-            <p className="cert-text">has successfully completed the course</p>
-            <h3 className="course-name">{certificate.course_name}</h3>
-            <p className="cert-text">
-              Duration: {certificate.course_duration || "N/A"}
-            </p>
-          </div>
+            <div className="certificate-info">
+              <p>
+                This is to certify that <strong>{certificate.student_name}</strong> has successfully completed the course <strong>{certificate.course_name}</strong> 
+                {certificate.course_duration ? ` in ${certificate.course_duration}` : ""}. The completion status of this course is <strong>{certificate.completion_status || "N/A"}</strong>, 
+                and the certificate serial number is <strong>{certificate.serial_number}</strong>. 
+                Awareness Paradigm empowers individuals to develop emotional intelligence, enhance personal growth, and gain the confidence needed to achieve professional and personal success. 
+                By completing this course, the learner has demonstrated commitment to self-improvement and the principles of mindfulness, resilience, and holistic learning.
+              </p>
 
-          <div className="certificate-footer">
-            <p>
-              <strong>Serial No:</strong> {certificate.serial_number}
-            </p>
-            <p>
-              <strong>Status:</strong> {certificate.completion_status || "N/A"}
-            </p>
-          </div>
-
-          {/* ✅ Download badge button */}
-          {certificate.badge_url && (
-            <div className="download-btn-container">
-              <a
-                href={getDownloadLink(certificate.badge_url)}
-                target="_blank"
-                rel="noopener noreferrer"
-                download
-                className="download-btn"
-              >
-                ⬇️ Download Badge
-              </a>
+              {certificate.badge_url && (
+                <a
+                  href={getDownloadLink(certificate.badge_url)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  download
+                  className="download-btn"
+                >
+                  ⬇️ Download Badge
+                </a>
+              )}
             </div>
-          )}
+          </div>
         </div>
       )}
 
-      {/* Footer */}
-      <footer className="global-footer">
+      <footer className="certificate-footer">
         Awareness Paradigm Verification © {new Date().getFullYear()}
       </footer>
 
-      {/* Admin link */}
       <div className="admin-link-container">
         <p
           className="admin-link"
           onClick={() => navigate("/login")}
-          style={{ cursor: "pointer", marginTop: "15px", color: "#007bff" }}
         >
           Are you admin?
         </p>
