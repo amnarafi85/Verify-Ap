@@ -1,4 +1,4 @@
-import { HashRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useEffect, useState, ReactNode } from "react";
 import { supabase } from "./supabaseClient";
 import CertificateVerify from "./pages/CertificateVerify";
@@ -33,15 +33,15 @@ function ProtectedRoute({ children }: { children: ReactNode }) {
 
   if (loading) return <div>Loading...</div>;
 
-  return isAuthenticated ? <>{children}</> : <Navigate to="#/login" replace />;
+  return isAuthenticated ? <>{children}</> : <Navigate to="/login" replace />;
 }
 
 export default function App() {
   return (
-    <HashRouter>
+    <BrowserRouter>
       <Routes>
         {/* Default redirect */}
-        <Route path="/" element={<Navigate to="#/verify" replace />} />
+        <Route path="/" element={<Navigate to="/verify" replace />} />
 
         {/* Public routes */}
         <Route path="/verify" element={<CertificateVerify />} />
@@ -57,6 +57,6 @@ export default function App() {
           }
         />
       </Routes>
-    </HashRouter>
+    </BrowserRouter>
   );
 }
