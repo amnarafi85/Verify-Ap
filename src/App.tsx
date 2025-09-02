@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { HashRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useEffect, useState, ReactNode } from "react";
 import { supabase } from "./supabaseClient";
 import CertificateVerify from "./pages/CertificateVerify";
@@ -10,7 +10,6 @@ function ProtectedRoute({ children }: { children: ReactNode }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    // Check current session
     const checkSession = async () => {
       const { data } = await supabase.auth.getSession();
       setIsAuthenticated(!!data.session);
@@ -19,7 +18,6 @@ function ProtectedRoute({ children }: { children: ReactNode }) {
 
     checkSession();
 
-    // Listen for auth changes
     const { data: listener } = supabase.auth.onAuthStateChange(
       (_event, session) => {
         setIsAuthenticated(!!session);
@@ -38,7 +36,7 @@ function ProtectedRoute({ children }: { children: ReactNode }) {
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
         {/* Default redirect */}
         <Route path="/" element={<Navigate to="/verify" replace />} />
@@ -57,6 +55,6 @@ export default function App() {
           }
         />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
