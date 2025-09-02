@@ -1,11 +1,10 @@
 // src/pages/CertificateVerify.tsx
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // ✅ for navigation
+import { useNavigate } from "react-router-dom";
 import { supabase } from "../supabaseClient";
 import "./CertificateVerify.css";
 import logo192 from "./logo192.png";
 
-// Define the shape of your certificate row
 type CertificateRow = {
   id?: string;
   serial_number: string;
@@ -20,11 +19,10 @@ export default function CertificateVerify() {
   const [serial, setSerial] = useState("");
   const [certificate, setCertificate] = useState<CertificateRow | null>(null);
   const [error, setError] = useState("");
-  const navigate = useNavigate(); // ✅ hook for redirect
+  const navigate = useNavigate();
 
   const handleVerify = async (e: React.FormEvent) => {
     e.preventDefault();
-
     setError("");
     setCertificate(null);
 
@@ -47,6 +45,7 @@ export default function CertificateVerify() {
     }
   };
 
+  // Converts Google Drive URL to direct download
   const getDownloadLink = (url: string) => {
     if (!url) return url;
     if (url.includes("drive.google.com")) {
@@ -87,7 +86,9 @@ export default function CertificateVerify() {
             <h2 className="student-name">{certificate.student_name}</h2>
             <p className="cert-text">has successfully completed the course</p>
             <h3 className="course-name">{certificate.course_name}</h3>
-            <p className="cert-text">Duration: {certificate.course_duration}</p>
+            <p className="cert-text">
+              Duration: {certificate.course_duration || "N/A"}
+            </p>
           </div>
 
           <div className="certificate-footer">
@@ -95,10 +96,11 @@ export default function CertificateVerify() {
               <strong>Serial No:</strong> {certificate.serial_number}
             </p>
             <p>
-              <strong>Status:</strong> {certificate.completion_status}
+              <strong>Status:</strong> {certificate.completion_status || "N/A"}
             </p>
           </div>
 
+          {/* ✅ Download badge button */}
           {certificate.badge_url && (
             <div className="download-btn-container">
               <a
@@ -115,11 +117,12 @@ export default function CertificateVerify() {
         </div>
       )}
 
+      {/* Footer */}
       <footer className="global-footer">
         Awareness Paradigm Verification © {new Date().getFullYear()}
       </footer>
 
-      {/* ✅ Added "Are you admin?" link */}
+      {/* Admin link */}
       <div className="admin-link-container">
         <p
           className="admin-link"
