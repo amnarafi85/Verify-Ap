@@ -1,13 +1,35 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* Make the whole page scrollable horizontally on small screens */
+body, html {
+  overflow-x: auto;
+  width: 100%;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* Ensure container doesn’t hide content */
+.container {
+  min-width: 100%;
+  overflow-x: auto;
+}
+
+/* Force form to scroll horizontally if it overflows */
+form {
+  display: block;
+  width: max-content;  /* expands to fit content */
+  min-width: 100%;
+  overflow-x: auto;
+  white-space: nowrap; /* prevent line breaks */
+}
+
+/* Table or input wrapper scroll fix */
+.table-container, .form-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch; /* smooth scroll on mobile */
+}
+html, body, #root {
+  width: 100%;
+  height: 100%;
+  overflow-x: auto !important;   /* allow horizontal scrolling */
+}
+
+* {
+  box-sizing: border-box;
 }

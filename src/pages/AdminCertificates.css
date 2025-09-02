@@ -9,6 +9,7 @@
   border-radius: 12px;
   box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.08);
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  overflow-x: auto; /* ✅ allow horizontal scroll if needed */
 }
 
 /* Headings */
@@ -34,6 +35,7 @@
   border-radius: 10px;
   border: 1px solid #eee;
   margin-bottom: 2rem;
+  overflow-x: auto; /* ✅ scrollable if content too wide */
 }
 
 /* Form Layout */
@@ -41,6 +43,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 1rem;
+  min-width: 600px; /* ✅ force scroll instead of squeeze */
 }
 
 .form-grid input,
@@ -68,7 +71,7 @@ button {
   padding: 0.75rem 1.2rem;
   border-radius: 8px;
   transition: background 0.25s, transform 0.1s;
-  font-size: 0.95rem;
+  white-space: nowrap;
 }
 
 button:hover {
@@ -123,17 +126,18 @@ button.view-btn:hover {
 /* Table Container */
 .table-container {
   width: 100%;
-  overflow-x: auto;
+  overflow-x: auto; /* ✅ horizontal scroll */
   margin-top: 1rem;
   border-radius: 10px;
   border: 1px solid #eee;
+  -webkit-overflow-scrolling: touch; /* smooth iOS scroll */
 }
 
 /* Table Styling */
 .admin-table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 800px;
+  min-width: 900px; /* ✅ force scroll on small screens */
 }
 
 .admin-table th,
@@ -141,6 +145,7 @@ button.view-btn:hover {
   border: 1px solid #e5e7eb;
   padding: 0.8rem;
   text-align: center;
+  white-space: nowrap; /* ✅ keep inline content */
 }
 
 .admin-table th {
@@ -157,6 +162,7 @@ button.view-btn:hover {
   background: #f3f4f6;
 }
 
+/* Inputs inside table */
 .admin-table input {
   width: 95%;
   padding: 0.6rem;
@@ -186,6 +192,7 @@ button.view-btn:hover {
   color: #2563eb;
   font-weight: 600;
   text-decoration: none;
+  white-space: nowrap;
 }
 
 .download-link:hover {
@@ -200,13 +207,11 @@ button.view-btn:hover {
   padding: 1rem;
 }
 
-/* ---------------------- */
-/* MOBILE RESPONSIVE CSS */
-/* ---------------------- */
+/* Responsive */
 @media (max-width: 768px) {
   .admin-certificates {
     padding: 1rem;
-    margin: 1rem;
+    overflow-x: auto; /* ✅ keep scroll on smaller screens */
   }
 
   .admin-certificates h2 {
@@ -217,46 +222,41 @@ button.view-btn:hover {
     font-size: 1.1rem;
   }
 
+  .form-grid {
+    grid-template-columns: 1fr;
+    min-width: 700px; /* ✅ enforce scroll */
+  }
+
   .admin-buttons {
     flex-direction: column;
-    align-items: stretch;
   }
 
-  button {
-    width: 100%;
-    text-align: center;
-  }
-
-  .search-bar {
-    max-width: 100%;
+  .admin-table {
+    font-size: 0.9rem;
+    min-width: 700px; /* ✅ keeps scroll */
   }
 }
 
 @media (max-width: 480px) {
-  .admin-certificates {
-    padding: 0.8rem;
-    margin: 0.5rem;
-    border-radius: 8px;
-  }
-
   .admin-certificates h2 {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
   }
 
   .admin-certificates h3 {
     font-size: 1rem;
   }
 
-  .form-grid {
-    grid-template-columns: 1fr;
+  .search-bar {
+    max-width: 100%;
+  }
+
+  .admin-table th,
+  .admin-table td {
+    padding: 0.6rem;
+    font-size: 0.85rem;
   }
 
   .admin-table {
-    font-size: 0.85rem;
-    min-width: 600px;
-  }
-
-  .admin-buttons {
-    gap: 0.5rem;
+    min-width: 600px; /* ✅ force scroll on very small screens */
   }
 }

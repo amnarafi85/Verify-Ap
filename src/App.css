@@ -1,38 +1,26 @@
-.App {
-  text-align: center;
+/* Make the whole page scrollable horizontally on small screens */
+body, html {
+  overflow-x: auto;
+  width: 100%;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Ensure container doesn’t hide content */
+.container {
+  min-width: 100%;
+  overflow-x: auto;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* Force form to scroll horizontally if it overflows */
+form {
+  display: block;
+  width: max-content;  /* expands to fit content */
+  min-width: 100%;
+  overflow-x: auto;
+  white-space: nowrap; /* prevent line breaks */
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Table or input wrapper scroll fix */
+.table-container, .form-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch; /* smooth scroll on mobile */
 }
