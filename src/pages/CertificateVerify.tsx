@@ -1,5 +1,6 @@
 // src/pages/CertificateVerify.tsx
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"; // ✅ for navigation
 import { supabase } from "../supabaseClient";
 import "./CertificateVerify.css";
 import logo192 from "./logo192.png";
@@ -19,6 +20,7 @@ export default function CertificateVerify() {
   const [serial, setSerial] = useState("");
   const [certificate, setCertificate] = useState<CertificateRow | null>(null);
   const [error, setError] = useState("");
+  const navigate = useNavigate(); // ✅ hook for redirect
 
   const handleVerify = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -32,7 +34,6 @@ export default function CertificateVerify() {
       return;
     }
 
-    // ✅ no generics here
     const { data, error } = await supabase
       .from("certificates")
       .select("*")
@@ -42,7 +43,6 @@ export default function CertificateVerify() {
     if (error || !data) {
       setError("❌ No certificate found for this serial number.");
     } else {
-      // ✅ cast data to CertificateRow
       setCertificate(data as CertificateRow);
     }
   };
@@ -118,6 +118,17 @@ export default function CertificateVerify() {
       <footer className="global-footer">
         Awareness Paradigm Verification © {new Date().getFullYear()}
       </footer>
+
+      {/* ✅ Added "Are you admin?" link */}
+      <div className="admin-link-container">
+        <p
+          className="admin-link"
+          onClick={() => navigate("/login")}
+          style={{ cursor: "pointer", marginTop: "15px", color: "#007bff" }}
+        >
+          Are you admin?
+        </p>
+      </div>
     </div>
   );
 }
