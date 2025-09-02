@@ -1,0 +1,202 @@
+/* src/pages/AdminCertificates.css */
+
+/* Page Container */
+.admin-certificates {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.08);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Headings */
+.admin-certificates h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  font-weight: 600;
+  color: #2d2d2d;
+}
+
+/* Subheadings */
+.admin-certificates h3 {
+  font-size: 1.3rem;
+  margin: 1.5rem 0 1rem;
+  font-weight: 500;
+  color: #444;
+}
+
+/* Form Card */
+.admin-form {
+  background: #fdfdfd;
+  padding: 1.5rem;
+  border-radius: 10px;
+  border: 1px solid #eee;
+  margin-bottom: 2rem;
+}
+
+/* Form Layout */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.form-grid input,
+.form-grid select {
+  width: 100%;
+  padding: 0.9rem;
+  border: 1px solid #d0d0d0;
+  border-radius: 8px;
+  background: #fafafa;
+  transition: border 0.2s, box-shadow 0.2s;
+}
+
+.form-grid input:focus,
+.form-grid select:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 6px rgba(99, 102, 241, 0.3);
+  outline: none;
+}
+
+/* Buttons */
+button {
+  cursor: pointer;
+  border: none;
+  font-weight: 600;
+  padding: 0.75rem 1.2rem;
+  border-radius: 8px;
+  transition: background 0.25s, transform 0.1s;
+}
+
+button:hover {
+  transform: translateY(-1px);
+}
+
+/* Button Styles */
+button.save {
+  background: #22c55e;
+  color: white;
+}
+
+button.save:hover {
+  background: #16a34a;
+}
+
+button.add {
+  background: #6366f1;
+  color: white;
+}
+
+button.add:hover {
+  background: #4f46e5;
+}
+
+button.delete {
+  background: #ef4444;
+  color: white;
+}
+
+button.delete:hover {
+  background: #dc2626;
+}
+
+button.view-btn {
+  background: #8b5cf6;
+  color: white;
+}
+
+button.view-btn:hover {
+  background: #7c3aed;
+}
+
+/* Button Container */
+.admin-buttons {
+  margin-top: 1.2rem;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* Table Container (scrollable on small screens) */
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+  margin-top: 1rem;
+  border-radius: 10px;
+  border: 1px solid #eee;
+}
+
+/* Table Styling */
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 800px;
+}
+
+.admin-table th,
+.admin-table td {
+  border: 1px solid #e5e7eb;
+  padding: 0.8rem;
+  text-align: center;
+}
+
+.admin-table th {
+  background: #6366f1;
+  color: white;
+  font-weight: 500;
+}
+
+.admin-table tr:nth-child(even) {
+  background: #f9fafb;
+}
+
+.admin-table tr:hover {
+  background: #f3f4f6;
+}
+
+/* Inputs inside table */
+.admin-table input {
+  width: 95%;
+  padding: 0.6rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+/* Search Bar */
+.search-bar {
+  width: 100%;
+  max-width: 400px;
+  padding: 0.7rem 1rem;
+  margin: 1rem 0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: #fafafa;
+  transition: 0.2s;
+}
+
+.search-bar:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 6px rgba(99, 102, 241, 0.3);
+}
+
+/* Links */
+.download-link {
+  color: #2563eb;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.download-link:hover {
+  text-decoration: underline;
+}
+
+/* Empty State */
+.text-center {
+  text-align: center;
+  color: #666;
+  font-style: italic;
+  padding: 1rem;
+}
