@@ -20,7 +20,6 @@
   color: #2d2d2d;
 }
 
-/* Subheadings */
 .admin-certificates h3 {
   font-size: 1.3rem;
   margin: 1.5rem 0 1rem;
@@ -69,6 +68,7 @@ button {
   padding: 0.75rem 1.2rem;
   border-radius: 8px;
   transition: background 0.25s, transform 0.1s;
+  font-size: 0.95rem;
 }
 
 button:hover {
@@ -120,7 +120,7 @@ button.view-btn:hover {
   flex-wrap: wrap;
 }
 
-/* Table Container (scrollable on small screens) */
+/* Table Container */
 .table-container {
   width: 100%;
   overflow-x: auto;
@@ -157,7 +157,6 @@ button.view-btn:hover {
   background: #f3f4f6;
 }
 
-/* Inputs inside table */
 .admin-table input {
   width: 95%;
   padding: 0.6rem;
@@ -199,4 +198,65 @@ button.view-btn:hover {
   color: #666;
   font-style: italic;
   padding: 1rem;
+}
+
+/* ---------------------- */
+/* MOBILE RESPONSIVE CSS */
+/* ---------------------- */
+@media (max-width: 768px) {
+  .admin-certificates {
+    padding: 1rem;
+    margin: 1rem;
+  }
+
+  .admin-certificates h2 {
+    font-size: 1.6rem;
+  }
+
+  .admin-certificates h3 {
+    font-size: 1.1rem;
+  }
+
+  .admin-buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  button {
+    width: 100%;
+    text-align: center;
+  }
+
+  .search-bar {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .admin-certificates {
+    padding: 0.8rem;
+    margin: 0.5rem;
+    border-radius: 8px;
+  }
+
+  .admin-certificates h2 {
+    font-size: 1.4rem;
+  }
+
+  .admin-certificates h3 {
+    font-size: 1rem;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-table {
+    font-size: 0.85rem;
+    min-width: 600px;
+  }
+
+  .admin-buttons {
+    gap: 0.5rem;
+  }
 }
